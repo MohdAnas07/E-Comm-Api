@@ -8,12 +8,10 @@ const port = process.env.PORT || 3000;
 // Middleware passed 
 app.use(cors());
 
-
 // routes ======================
 app.get("/", (req, res) => {
     res.send("I am Live...")
 })
-
 
 app.get('/service', (req, res) => {
     res.send(appData);
