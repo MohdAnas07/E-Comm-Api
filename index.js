@@ -100,6 +100,20 @@ app.delete("/products/:id", async (req, res) => {
     res.send(product.data)
 })
 
+// Get all Cart
+app.get("/carts", async (req, res) => {
+    const data = await axios(`https://fakestoreapi.com/carts`);
+    res.send(data.data)
+})
+
+// Get a single cart
+app.get("/carts/:id", async (req, res) => {
+    const Id = req.params.id
+    const data = await axios(`https://fakestoreapi.com/carts/${Id}`);
+    res.send(data.data)
+})
+
+
 
 // Get service
 app.get('/service', (req, res) => {
