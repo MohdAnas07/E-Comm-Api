@@ -62,6 +62,28 @@ app.post("/products", async (req, res) => {
     res.send(product.data)
 })
 
+// Update a product
+app.put("/products/:id", async (req, res) => {
+
+    const Id = req.params.id;
+    const header = {
+        method: "PUT",
+        body: JSON.stringify(
+            {
+                "title": "test product",
+                "price": 13.5,
+                "description": "lorem ipsum set",
+                "image": "https://i.pravatar.cc",
+                "category": "electronic"
+            }
+        )
+    }
+    const product = await axios(`https://fakestoreapi.com/products/${Id}`, header);
+    res.send(product.data)
+})
+
+
+
 
 
 // Get service
