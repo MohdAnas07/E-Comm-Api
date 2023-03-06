@@ -9,11 +9,13 @@ const port = process.env.PORT || 3000;
 // Middleware passed 
 app.use(cors());
 
-// routes ======================
+// Base Route ======================
 app.get("/", (req, res) => {
     res.send("I am Live...")
 })
 
+
+// Get All products 
 app.get("/products", async (req, res) => {
     const products = await axios('https://fakestoreapi.com/products');
     const prodData = products.data
@@ -26,6 +28,7 @@ app.get("/products", async (req, res) => {
     res.send(prodData)
 })
 
+
 // Get a single product
 app.get("/products/:id", async (req, res) => {
     const ID = req.params.id
@@ -33,11 +36,13 @@ app.get("/products/:id", async (req, res) => {
     res.send(product.data)
 })
 
+
 // Get all categories
 app.get("/products/categories", async (req, res) => {
     const product = await axios(`https://fakestoreapi.com/products/categories`);
     res.send(product.data)
 })
+
 
 // Get products in a specific category
 app.get("/products/categories/jewelery", async (req, res) => {
@@ -45,8 +50,8 @@ app.get("/products/categories/jewelery", async (req, res) => {
     res.send(product.data)
 })
 
-// Get products in a specific category
 
+// Get products in a specific category
 app.post("/products", async (req, res) => {
     const header = {
         method: "POST",
@@ -61,6 +66,7 @@ app.post("/products", async (req, res) => {
     const product = await axios(`https://fakestoreapi.com/products`, header);
     res.send(product.data)
 })
+
 
 // Update a product
 app.put("/products/:id", async (req, res) => {
@@ -83,7 +89,16 @@ app.put("/products/:id", async (req, res) => {
 })
 
 
+// Delete a product
+app.delete("/products/:id", async (req, res) => {
 
+    const Id = req.params.id;
+    const header = {
+        method: "DELETE"
+    }
+    const product = await axios(`https://fakestoreapi.com/products/${Id}`, header);
+    res.send(product.data)
+})
 
 
 // Get service
@@ -91,7 +106,7 @@ app.get('/service', (req, res) => {
     res.send(appData);
 })
 
+// listening Server 
 app.listen(port, () => {
     console.log(`server is running at PORT ${port}`)
 })
-
