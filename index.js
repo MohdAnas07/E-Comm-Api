@@ -14,12 +14,11 @@ app.get("/", (req, res) => {
     res.send("I am Live...")
 })
 
-
 // Get All products 
 app.get("/products", async (req, res) => {
     const products = await axios('https://fakestoreapi.com/products');
     const prodData = products.data
-    // Sort results
+    // Sort results ==================>>
     if (req.query.sort) {
         prodData.sort((a, b) => {
             return b.id - a.id
